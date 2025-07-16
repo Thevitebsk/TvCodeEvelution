@@ -9,11 +9,10 @@ while True:
   ce=f"0123456789{n} abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]`|~"
   s=[];nc=0;b=[];e=0;num=[]
   out=[];inp=input(">>")
-  for _ in range(10):num.append(str(_))
   if inp=="exit":break
   while len(inp)>nc:
     if inp[nc]=="+":s.append(int(s.pop(0))+int(s.pop(0)))
-    elif inp[nc]in num[0:9]:s.append(int(inp[nc]))
+    elif inp[nc]in ce[0:9]:s.append(int(inp[nc]))
     elif inp[nc]=="a":s.append(10)
     elif inp[nc]=="|":e=1;break
     elif inp[nc]=="n":out.append(int(s.pop(0)))
