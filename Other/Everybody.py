@@ -19,7 +19,7 @@ def evaluate(arg) -> bool:
     if len(ayl)==1 and ayl[0][0]=="@":
         return bool(variables[ayl[0][1::]])
     elif len(ayl)==1 and ayl[0][0]!="@":
-        return bool(ayl[0][1::])
+        return bool(ayl[0])
 
 p=0
 try:
@@ -32,8 +32,8 @@ while p!=len(code):
     print(c)
     if c[0][0]=="@"and c[0][-1]==","and" ".join(c[1:])=="at least say something":
         variables[c[0][1:-1]]=input()
-    if " ".join(c[0:2])=="Quick question,"and" ".join(c[-3:len(c)])=="If so, then:":
-        if evaluate(c[2:-3][0:len(c)-2]): ...
+    elif " ".join(c[0:2])=="Quick question,"and" ".join(c[-3:len(c)])=="If so, then:":
+        if evaluate(c[2:-3][0:len(c)-2]):...
         else:
             while c!="" and p!=len(code):
                 c=code[p].strip()
