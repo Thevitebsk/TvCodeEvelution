@@ -1,4 +1,4 @@
-# BPINPBP Programs Aren't A Valid Python Bytecode Programs
+# BPINPBP Program Isn't A Valid Python Bytecode Program
 
 INST = {"0x0":"HALT","0x1":"PUSH_REFRENCE"}
 opcodes=[];p=debug=0;refs=[]
