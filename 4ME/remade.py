@@ -1,4 +1,4 @@
-#s.py
+#taken from https://www.online-python.com/ks9NQoxYqd
 #An attempt of retrying make 4ME
 
 import os;print("{R4ME}")
