@@ -30,9 +30,9 @@ except IndexError:
 while p!=len(code):
     c=code[p].strip().split(" ")
     print(c)
-    if c[0][0]=="@"and c[0][-1]==","and" ".join(c[1:])=="at least say something":
+    if c[0][0]=="@"and c[0][-1]==","and code[p].endswith("at least say something"):
         variables[c[0][1:-1]]=input()
-    elif " ".join(c[0:2])=="Quick question,"and" ".join(c[-3:len(c)])=="If so, then:":
+    elif code[p].startswith("Quick question,")and code[p].endswith("If so, then:"):
         if evaluate(c[2:-3][0:len(c)-2]):...
         else:
             while c!="" and p!=len(code):
