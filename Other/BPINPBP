@@ -1,0 +1,37 @@
+# BPINPBP Programs Aren't A Valid Python Bytecode Programs
+
+INST = {"0x0":"HALT","0x1":"PUSH_REFRENCE"}
+opcodes=[];p=debug=0;refs=[]
+import sys
+try:sys.argv[2]
+except IndexError:...
+else:
+    a=sys.argv[2::]
+    while len(a)>0:
+        if a[0] in ["-d","--debug"]: debug=1
+        a.pop(0)
+try:code=sys.argv[1]
+except IndexError:
+    raise FileNotFoundError("No file was given")
+try:code=open(code).read()
+except FileNotFoundError:
+    raise FileNotFoundError(f"File {code} doesn't exist")
+[opcodes.append(hex(ord(i)))for i in code];opcodes.append("0x0")
+print(opcodes)
+while p!=len(opcodes):
+    try:INST[opcodes[p]]
+    except KeyError:print(f"SYSTEM ERROR: INVALID OP CODE {opcodes[p]}"); break
+    if opcodes[p]=="0x0": break
+    elif opcodes[p]=="0x1":
+        refs.append({f"{opcodes[p+1]}":0}); p+=1
+        opcodes[p]+=" val"
+    p+=1
+if debug:
+    p=1
+    print("N:      HEX:    OPCODE:")
+    for i, opcode in enumerate(opcodes):
+        print(f"{i + 1:<7} {opcode[0:4]:<8}", end="")
+        try:print(INST[opcode])
+        except KeyError:
+            print("NOP") if opcode[len(opcode)-3::]!="val" else print(f"{"ARGUMENT":<8}")
+        p+=1
