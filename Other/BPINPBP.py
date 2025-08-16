@@ -2,6 +2,7 @@
 
 INST = {"0x0":"HALT","0x1":"PUSH_REFRENCE"}
 opcodes=[];p=debug=0;refs=[]
+print("BPINPBC Programs Aren't A Valid Python ByteCode Program")
 import sys
 try:sys.argv[2]
 except IndexError:...
@@ -17,7 +18,6 @@ try:code=open(code).read()
 except FileNotFoundError:
     raise FileNotFoundError(f"File {code} doesn't exist")
 [opcodes.append(hex(ord(i)))for i in code];opcodes.append("0x0")
-print(opcodes)
 while p!=len(opcodes):
     try:INST[opcodes[p]]
     except KeyError:print(f"SYSTEM ERROR: INVALID OP CODE {opcodes[p]}"); break
@@ -27,6 +27,7 @@ while p!=len(opcodes):
         opcodes[p]+=" val"
     p+=1
 if debug:
+    print(refs)
     p=1
     print("N:      HEX:    OPCODE:")
     for i, opcode in enumerate(opcodes):
