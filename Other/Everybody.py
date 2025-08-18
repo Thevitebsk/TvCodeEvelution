@@ -1,4 +1,4 @@
-# Everybody! - langauge inspred by "@everyone" (see https://esolangs.org/wiki/@everyone for more info about "@everyone")
+# Everybody! - formal-ish version "@everyone" (see https://esolangs.org/wiki/@everyone for more info about "@everyone")
 
 import sys
 print("Everybody!")
@@ -7,19 +7,23 @@ try:code = open(sys.argv[1]).readlines()
 except IndexError:print("no file was used"); exit()
 
 p=0
-while p!=len(code): code[p]=code[p].replace("\n",""); p+=1
+code=[i.strip()for i in code]
 
 def evaluate(arg) -> bool:
-    a=arg[0][0:-1]
-    p=0
-    
+    def is_int(x):
+        try:int(x)
+        except ValueError:return False
+        return True
+    a=arg[0][:-1]
     ayl=a.replace("->"," -> ").split(" ")
-    print(a,ayl)
 
-    if len(ayl)==1 and ayl[0][0]=="@":
-        return bool(variables[ayl[0][1::]])
-    elif len(ayl)==1 and ayl[0][0]!="@":
-        return bool(ayl[0])
+    if len(ayl)==1 and is_int(ayl[0]):
+        return bool(int(ayl[0]))
+    elif len(ayl)==1 and ayl[0][0]=="@":
+        if is_int(variables[ayl[0][1::]]):
+            return bool(int(variables[ayl[0][1::]]))
+        else:
+            return bool(variables[ayl[0][1::]])
 
 p=0
 try:
@@ -27,16 +31,30 @@ try:
 except IndexError:
     raise Exception("\nERROR INFO:\n"+
                    "No starting point found")
+
 while p!=len(code):
     c=code[p].strip().split(" ")
-    print(c)
+
     if c[0][0]=="@"and c[0][-1]==","and code[p].endswith("at least say something"):
         variables[c[0][1:-1]]=input()
+    
     elif code[p].startswith("Quick question,")and code[p].endswith("If so, then:"):
-        if evaluate(c[2:-3][0:len(c)-2]):...
+        print(bool(evaluate(c[2:-3][0:len(c)-2])));exit()
+        if bool(evaluate(c[2:-3][0:len(c)-2])):...
         else:
-            while c!="" and p!=len(code):
-                c=code[p].strip()
-                p+=1
+            while code[p].strip().split(" ")!="" and p!=len(code): p+=1
             p-=1
+    
+    elif c[0]=="|":...
+    elif " ".join(c[0:3])=="Please go to":
+        tp=p;p=0;target=c[-1]
+        while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
+    elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
+        try:int(variables[c[-1][1:-1]])
+        except ValueError:print(f"{c[-1][1:-1]}:\n"
+                               +f"| Say the number @{c[-1][1:-1]}!\n"
+                                +"I am not even a number");exit()
+        except KeyError:print(f"You:\nSay the number @{c[-1][1:-1]}\n"
+                              +"You:\nOh right they aren't here");exit()
+        print(int(variables[c[-1][1:-1]]),end=" ")
     p+=1
