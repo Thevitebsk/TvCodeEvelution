@@ -39,16 +39,16 @@ while p!=len(code):
         variables[c[0][1:-1]]=input()
     
     elif code[p].startswith("Quick question,")and code[p].endswith("If so, then:"):
-        print(bool(evaluate(c[2:-3][0:len(c)-2])));exit()
         if bool(evaluate(c[2:-3][0:len(c)-2])):...
         else:
-            while code[p].strip().split(" ")!="" and p!=len(code): p+=1
+            while code[p].strip().split(" ")[0]!="End" and p!=len(code): p+=1
             p-=1
     
     elif c[0]=="|":...
     elif " ".join(c[0:3])=="Please go to":
         tp=p;p=0;target=c[-1]
         while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
+
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
         try:int(variables[c[-1][1:-1]])
         except ValueError:print(f"{c[-1][1:-1]}:\n"
