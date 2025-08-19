@@ -50,7 +50,7 @@ while p!=len(code):
             variables[c[1][1:]]=" ".join(c[5:])
         else:...
     elif " ".join(c[0:3])=="Please go to":
-        tp=p;p=0;target=c[-1]
+        p=0;target=c[-1]
         while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
 
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
