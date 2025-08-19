@@ -9,8 +9,8 @@ except IndexError:print("no file was used"); exit()
 p=0
 code=[i.strip()for i in code]
 
-def evaluate(arg) -> bool:
-    def is_int(x):
+def evaluate(arg)->bool:
+    def is_int(x)->bool:
         try:int(x)
         except ValueError:return False
         return True
@@ -44,17 +44,32 @@ while p!=len(code):
             while code[p].strip().split(" ")[0]!="End" and p!=len(code): p+=1
             p-=1
     
-    elif c[0]=="|":...
+    elif c[0]=="|":
+        if c[1][0]=="@"and" ".join(c[2:5])=="is set to":
+            variables[c[1][1:]]=" ".join(c[5:])
+        else:...
     elif " ".join(c[0:3])=="Please go to":
         tp=p;p=0;target=c[-1]
         while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
 
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
-        try:int(variables[c[-1][1:-1]])
+        try:print(int(variables[c[-1][1:-1]]))
         except ValueError:print(f"{c[-1][1:-1]}:\n"
                                +f"| Say the number @{c[-1][1:-1]}!\n"
                                 +"I am not even a number");exit()
-        except KeyError:print(f"You:\nSay the number @{c[-1][1:-1]}\n"
+        except KeyError:print(f"You:\nSay the number @{c[-1][1:-1]}!\n"
                               +"You:\nOh right they aren't here");exit()
-        print(int(variables[c[-1][1:-1]]),end=" ")
+    
+    elif " ".join(c[0:3])=="Say the phrase"and c[-1][-1]=="!":
+        try:
+            if variables[c[-1][1:-1]][0]=="\"":
+                print(variables[c[-1][1:-1]][1:-1],end=" ")
+            else:
+                print(variables[c[-1][1:-1]],end=" ")
+        except KeyError:
+            if c[-1][0]=="@":
+                print(f"You:\nSay the phrase @{c[-1][1:-1]}!\n"
+                      +"You:\nOh right they aren't here");exit()
+            elif " ".join(c[3:])[0]=="\"": print(" ".join(c[3:])[1:-2])
+            else: print(" ".join(c[3:]))
     p+=1
