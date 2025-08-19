@@ -51,8 +51,10 @@ while p!=len(code):
         else:...
     elif " ".join(c[0:3])=="Please go to":
         p=0;target=c[-1]
-        while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
-
+        try:
+            while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
+        except IndexError:print(f"ERROR INFO:\nNo label named {target} was found")
+    
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
         try:print(int(variables[c[-1][1:-1]]),end=" ")
         except ValueError:print(f"ERROR INFO:\n{c[-1][1:-1]}:\n"
