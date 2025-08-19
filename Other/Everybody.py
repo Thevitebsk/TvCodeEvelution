@@ -46,6 +46,7 @@ while p!=len(code):
     
     elif c[0]=="|":
         if c[1][0]=="@"and" ".join(c[2:5])=="is set to":
+            if c[5][0]==">":variables[c[1][1:]]="\n"
             variables[c[1][1:]]=" ".join(c[5:])
         else:...
     elif " ".join(c[0:3])=="Please go to":
@@ -54,11 +55,11 @@ while p!=len(code):
 
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
         try:print(int(variables[c[-1][1:-1]]))
-        except ValueError:print(f"{c[-1][1:-1]}:\n"
+        except ValueError:print(f"\n{c[-1][1:-1]}:\n"
                                +f"| Say the number @{c[-1][1:-1]}!\n"
                                 +"I am not even a number");exit()
-        except KeyError:print(f"You:\nSay the number @{c[-1][1:-1]}!\n"
-                              +"You:\nOh right they aren't here");exit()
+        except KeyError:print(f"\nYou:\nSay the number @{c[-1][1:-1]}!\n"
+                              +"\nYou:\nOh right they aren't here");exit()
     
     elif " ".join(c[0:3])=="Say the phrase"and c[-1][-1]=="!":
         try:
@@ -68,8 +69,12 @@ while p!=len(code):
                 print(variables[c[-1][1:-1]],end=" ")
         except KeyError:
             if c[-1][0]=="@":
-                print(f"You:\nSay the phrase @{c[-1][1:-1]}!\n"
-                      +"You:\nOh right they aren't here");exit()
+                print(f"\nYou:\nSay the phrase @{c[-1][1:-1]}!\n"
+                      +"\nYou:\nOh right they aren't here");exit()
             elif " ".join(c[3:])[0]=="\"": print(" ".join(c[3:])[1:-2])
-            else: print(" ".join(c[3:]))
+            else:
+                try:print(int(" ".join(c[3:])[:-1]))
+                except ValueError:
+                    print(f"\nYou:\nSay the phrase {" ".join(c[3:])}"
+                          +"\nYou:\nOh right i forgot, it doesn't work like that")
     p+=1
