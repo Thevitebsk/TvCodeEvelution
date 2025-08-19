@@ -29,8 +29,8 @@ p=0
 try:
     while code[p]!="Hello everyone!": p+=1
 except IndexError:
-    raise Exception("\nERROR INFO:\n"+
-                   "No starting point found")
+    print("ERROR INFO:\n"+
+          "No starting point found");exit()
 
 while p!=len(code):
     c=code[p].strip().split(" ")
@@ -55,10 +55,10 @@ while p!=len(code):
 
     elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
         try:print(int(variables[c[-1][1:-1]]),end=" ")
-        except ValueError:print(f"\n{c[-1][1:-1]}:\n"
+        except ValueError:print(f"ERROR INFO:\n{c[-1][1:-1]}:\n"
                                +f"| Say the number @{c[-1][1:-1]}!\n"
                                 +"I am not even a number");exit()
-        except KeyError:print(f"\nYou:\nSay the number @{c[-1][1:-1]}!\n"
+        except KeyError:print(f"ERROR INFO:\nYou:\nSay the number @{c[-1][1:-1]}!\n"
                               +"\nYou:\nOh right they aren't here");exit()
     
     elif " ".join(c[0:3])=="Say the phrase"and c[-1][-1]=="!":
@@ -71,13 +71,13 @@ while p!=len(code):
                 print(variables[c[-1][1:-1]],end=" ")
         except KeyError:
             if c[-1][0]=="@":
-                print(f"\nYou:\nSay the phrase @{c[-1][1:-1]}!\n"
+                print(f"ERROR INFO:\nYou:\nSay the phrase @{c[-1][1:-1]}!\n"
                       +"\nYou:\nOh right they aren't here");exit()
             elif " ".join(c[3:])[0]=="\"": print(" ".join(c[3:])[1:-2],end=" ")
             else:
                 try:print(int(" ".join(c[3:])[:-1]),end=" ")
                 except ValueError:
-                    print(f"\nYou:\nSay the phrase {" ".join(c[3:])}"
+                    print(f"ERROR INFO:\nYou:\nSay the phrase {" ".join(c[3:])}"
                           +"\nYou:\nOh right i forgot, it doesn't work like that")
     elif c[0]in["+","-","*","/"]:
         variables[c[2][1:]]=str(eval(str(variables[c[2][1:]])+c[0]+c[1]))
