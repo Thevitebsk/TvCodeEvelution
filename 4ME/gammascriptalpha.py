@@ -1,4 +1,4 @@
-#MPUG.py
+#U8LL.py + MPUG.py
 #this version of gammascript is really incomplete and will probably never will be complete
 import re
 class Lexer(object):
@@ -19,4 +19,9 @@ class Lexer(object):
             source_index +=1
         print(token)
         return token
-Lexer.tokenize("writetolog 12")
+def main():
+    content = ""
+    with open('test.gr') as file:
+        content = file.read()
+    lex=Lexer(content).tokenize()
+main()
