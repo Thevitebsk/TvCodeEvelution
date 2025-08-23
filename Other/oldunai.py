@@ -1,7 +1,10 @@
-#Hell.py
+#m
 
 # --UNAI-- #
-s=[];ts=[];p=io=0;c=input()
+import sys
+try:c=open(sys.argv[1]).read()
+except:print(f"Usage: python {__file__.split(chr(0x5c))[-1]} \"(file name)\"");exit()
+s=[];ts=[];p=io=0
 def push_int():
     global p
     while 1:
@@ -17,8 +20,8 @@ while len(c)>p:
         p+=1
         while c[p]!="\"":ts.append(c[p]);p+=1
         s.append("".join(ts));ts.clear()
-    elif c[p]=="`":s.pop()
+    elif c[p]=="^":s.pop()
     elif c[p]==",":s.append(input())
-    elif c[p]=="[":p=c.index("]",p)
+    elif c[p]=="]":p=c.index("\n",p)
     p+=1
 if io==0:print("\n".join(s))
