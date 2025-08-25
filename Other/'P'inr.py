@@ -13,7 +13,7 @@ while len(c)>p:
  elif c[p]=="@":s.append(input())
  elif c[p]=="|":
     if not s:print(c[p+1],end="");p+=1
-    else:print(s.pop())
+    else:print(s.pop(),end="")
  elif c[p]=="j":
   try:p=c.index(str(c[p+1]))
   except ValueError:l[c[p+1]]=p+1
