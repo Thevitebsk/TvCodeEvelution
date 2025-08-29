@@ -1,31 +1,28 @@
-i='''''';p=-1;tp=0;targ=""
-tp=0;num=[];c="";po=0;sub=0
-for tnum in range(10):num.append(str(tnum))
-ts=[];s=[]
-print("true")
+import sys
+try:
+  code = open(sys.argv[1]).read()
+  try: i = open(sys.argv[2]).readlines()
+  except: i=[]
+except: print(f"Usage: python {__file__.split(chr(0x5c))[-1]} \"(file name)\"");exit()
+p = tp = 0; ts = []; s = []; ld = []; tcode = ""
+if not code : code = " "
 while 1:
- try:
-  p+=1
-  if i[p]=='"':
-   while i[p+1]!='"':p+=1;ts.append(i[p])
-   ts.reverse();p+=1
-   while len(ts)>1:ts.append(ts.pop()+ts.pop())
-   s.append(ts.pop())
-  elif i[p]=='.':print(s.pop(),end="")
-  elif i[p]in num:s.append(i[p]);s[len(s)-1]=int(s[len(s)-1])
-  elif i[p]==',':c=input()
-  elif i[p]==':':ts.append(s.pop());ts.append(ts[0]);s.append(ts.pop());s.append(ts.pop())
-  elif i[p]=="'":s.append(c[0]);c=c[1:len(c)]
-  elif i[p]=='»':
-   targ=i[p+1];tp=p;sub=1
-   while 1:
-    if i[p]==targ and i[p+1]==":":p+=1;break
-    if len(i)-2==p:p=0
-    p+=1
-  elif i[p]==";"and sub==1:p=tp
-  elif i[p]=="\n":break
-  elif i[p]=="-":s.pop()
-  elif i[p]=="+":s.append(int(s.pop())+int(s.pop()))
-  elif i[p]=="`":s.append(int(s.pop())*-1)
-  if len(i)-1==p:p=-1
- except IndexError:break
+  if code[p] == '"' :
+    p+=1; s.append(code[p : code.index('"', p)])
+    p=code.index('"', p)
+  elif code[p] == "." : print(s.pop())
+  elif code[p] == "," : 
+    if i : s.append(i.pop(0))
+    else : raise EOFError("Input reached an EOF")
+  elif code[p] in "0123456789" : s.append(int(code[p]))
+  elif code[p] == "[" : p=code.index("]", p)
+  elif code[p] == "+" : s.append(int(s.pop())+int(s.pop()))
+  elif code[p] == "-" : s.pop()
+  elif code[p] == "`" : s.append(int(s.pop())*-1)
+  elif code[p] == ":" : s.append(s[-1])
+  elif code[p] == '(' :
+    p+=1; ld.append(code[p : code.index(')', p)]+")")
+    p=code.index(')', p)
+  if code[p] == "\n" : break
+  if len(code) == p +1 : p = -1
+  p += 1
