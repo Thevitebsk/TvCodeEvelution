@@ -11,48 +11,15 @@
 #examples
 #+++++++*---*+++++++**+++*++++++++*--------*+++*------*%+++*/ - hello world
 print("afftur\na brother to branjunk")
-optime=0
-code=[]
-ac=0
-global end
-end=0
-mem=0
-def a():
-    global ac
-    ac += 1
-def m():
-    global ac
-    ac -= 1
-def p():
-    global ac
-    print(ac)
-def store():
-    global ac
-    global mem
-    mem=ac
-    ac=0
-def ui():
-    global mem
-    mem=int(input())
-def iq():
-    print(mem)
-while True:
-    end=0
-    ac=0
-    i=input("\n>>")
+optime=ac=end=mem=0
+while 1:
+    end=ac=0;i=input("\n>>")
     while end < 1:
         for c in i:
-            if c == "+" and "+" not in code:
-                a()
-            if c == "-" and "-" not in code:
-                m()
-            if c == "*" and "*" not in code:
-                p()
-            if c == "/" and "/" not in code:
-                end=1
-            if c == "%" and "%" not in code:
-                store()
-            if c == "?" and "?" not in code:
-                ui()
-            if c == "`" and "`" not in code:
-                iq()
+            if c == "+":   ac += 1
+            elif c == "-": ac -= 1
+            elif c == "*": print(ac)
+            elif c == "/": end=1
+            elif c == "%": mem=ac; ac=0
+            elif c == "?": mem=int(input())
+            elif c == "`": print(mem)
