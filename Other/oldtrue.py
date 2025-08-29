@@ -1,20 +1,14 @@
-i="""""";p=-1;tp=0;targ=""
-tp=0;num=[];c="";po=0;sub=0
-for tnum in range(10):num.append(str(tnum))
+i="""""";p=-1;tp=po=sub=0;targ="";c=""
 ts=[];s=[]
 print("true")
 while 1:
  try:
   p+=1
-  if i[p]=='"':
-   while i[p+1]!='"':p+=1;ts.append(i[p])
-   ts.reverse();p+=1
-   while len(ts)>1:ts.append(ts.pop()+ts.pop())
-   s.append(ts.pop())
-  elif i[p]=='.':print(s.pop(),end="")
-  elif i[p]in num:s.append(i[p])
+  if i[p]=='"': s.append(i[p+1:i.index("\"",p+1)]); p=i.index("\"",p+1)
+  elif i[p]=='.': print(s.pop(),end="")
+  elif i[p]in"0123456789":s.append(int(i[p]))
   elif i[p]==',':c=input()
-  elif i[p]==':':ts.append(s.pop());ts.append(ts[0]);s.append(ts.pop());s.append(ts.pop())
+  elif i[p]==':':s.append(s[-1])
   elif i[p]=="'":s.append(c[0]);c=c[1:len(c)]
   elif i[p]=='»':
    targ=i[p+1];tp=p;sub=1
