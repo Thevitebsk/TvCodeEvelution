@@ -1,12 +1,12 @@
 stack=[];var={}
 out="";code="""
 
-"""
-s=0;tr=0;p=0;code=code[1:len(code)-1]
+""".strip()
+s=tr=p=0
 if code=="":s=1;out+=input()
-while len(code)>p and s==0:
+while len(code)!=p and not s:
  if len(out)>1023:tr=1;break
- if code[p]in list(map(str,range(10))):stack.append(int(code[p]))
+ if code[p]in"0123456789":stack.append(int(code[p]))
  if code[p]=="•":var[code[p+1]]=stack.pop()
  if code[p]==",":
   try:
