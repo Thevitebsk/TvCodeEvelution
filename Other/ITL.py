@@ -1,4 +1,4 @@
-"MusuM";from sys import argv
+from sys import argv
 p=n=0
 try:c=open(argv[1]).read()
 except (IndexError,FileNotFoundError):print("False");exit()
@@ -23,9 +23,17 @@ class MusuM():
         self.lex(code)
 
 print("""
-|\\   /|             |\\   /|
-| \\_/ | | | /-- | | | \\_/ | 
-|     | | | \\/\\ | | |     |
-|     | \\_/ --/ \\_/ |     |
+@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@
+@@@   @@@   @@@
+@@@   @@@   @@@
+ @    @@@   @@@
+      @@@   @@@
+ @    @@@   @@@
+@@@   @@@   @@@
+@@@   @@@   @@@
+@@@   @@@   @@@
+@@@   @@@   @@@@@@
+@@@   @@@   @@@@@@
 """[1:-1])
 MusuM(c)
