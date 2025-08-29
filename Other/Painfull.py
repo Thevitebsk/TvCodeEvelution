@@ -13,23 +13,26 @@ class Painfull:
     def __init__(self,x:str):
         "Good luck actually using it since this is based on malboge"
         x=self.Execute(self.Octodenc(x))
-        if not len(x): 1
-        else: print("output:",x)
+        print("output:",x)if len(x)else 1
 
     def Execute(self,x) -> str:
         output=""; p=0; v=[] ; w=[0]*16
         print(x)
         while p!=len(x):
+            print(x[p],v,w,output)
             if x[p]==0: break #HALT
             elif x[p]==1: #ADD
                 try:w[x[p+2]]=x[p+1]+w[x[p+2]]; p+=2
-                except:print("pos: ",p," -> ",x[p],"\nnot enough arguments were given");exit()
+                except IndexError:print(f"pos: {p} -> {x[p]}\nnot enough arguments were given");exit()
             elif x[p]==2: #MULTI
                 try:w[x[p+1]]=w[x[p+1]]*w[x[p+2]]
-                except:print("pos: ",p," -> ",x[p],"\nnot enough arguments were given");exit()
-            elif x[p]==7:
+                except IndexError:print(f"pos: {p} -> {x[p]}\nnot enough arguments were given");exit()
+            elif x[p]==3:
+                try:v.append(w[p+1])
+                except IndexError:print(f"pos: {p} -> {x[p]}\nnot enough arguments were given")
+            elif x[p]==15:
                 try:output+=chr(v.pop())
-                except:print("pos: ",p," -> ",x[p],"\nno values to output");exit()
+                except:print(f"pos: {p} -> {x[p]}\nno value is in the stack");exit()
             p+=1
         return output
-Painfull("""2/41\\4 """)
+Painfull("""2_41=31""")
