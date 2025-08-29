@@ -11,15 +11,15 @@
 #examples
 #+++++++*---*+++++++**+++*++++++++*--------*+++*------*%+++*/ - hello world
 print("afftur\na brother to branjunk")
-optime=ac=end=mem=0
+ac=mem=0
 while 1:
-    end=ac=0;i=input("\n>>")
-    while end < 1:
-        for c in i:
+    ac=0
+    while 1:
+        for c in input("\n>> "):
             if c == "+":   ac += 1
             elif c == "-": ac -= 1
             elif c == "*": print(ac)
-            elif c == "/": end=1
+            elif c == "/": break
             elif c == "%": mem=ac; ac=0
             elif c == "?": mem=int(input())
-            elif c == "`": print(mem)
+            elif c == "`": print(mem,end=" ")
