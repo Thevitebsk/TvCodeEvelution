@@ -5,28 +5,30 @@ except IndexError:filein=1;c=""
 except FileNotFoundError:print("ITL: The file selected doesn't exist");exit()
 try:
     if argv[2][0]=="-":
+        a=argv[2:]
         while 1:
-            try:argv[2:]
+            try:a
             except IndexError:break
             else:
-                if argv[2:][0]in["-d","--debug"]: debug=1
-                elif argv[2:][0]in["-h","--help"]: print("ITL Line Structure:"+" "*15+"Arguments:",
+                if a[0]in["-d","--debug"]: debug=1
+                elif a[0]in["-h","--help"]: print("ITL Line Structure:"+" "*15+"Arguments:",
                 "py GSL <FILENAME> <ARGUMENTS>     -d --debug   Shows debug info",
                 " "*34+"-h --help    Shows this help message",sep="\n");exit()
                 else:print("Structure incorrect:\nExpected:  py GSL <FILENAME> <ARGUMENTS>",
                 f"Got:       {" ".join(argv)}",sep="\n");exit()
-            argv[2:].pop(0)
+            a.pop(0)
 except IndexError:...
 
 # The actual implementation:
-class ITL():
+class Interactive_Thon_Langauge():
     def lex(self,x:str)->list:
         #Make every command as an entry to the mapper 
-        p=m=n=0;o="";keys={
+        p=m=n=0;o="";mapper=[]
+        keys={
             0  :[":"],         #Non-argumented keywords
             1  :["f","r"],     #One-argumented keywords
             "A":["give"]       #Any ammount of arguments
-            };ts="<:;";mapper=[]
+        };ts="<:;"
         for i in x:
             if i=="\"":o+=i;m=int(not m)
             elif i in ts: o+=f" {i} "
@@ -97,7 +99,7 @@ print("""
 @@@   @@@   @@@@@@
 @@@   @@@   @@@@@@
 """[1:-1])
-if not filein:ITL(c)
+if not filein:Interactive_Thon_Langauge(c)
 else:
     while (i:=input("Interactive Thon Langaugeㅣ")):c+=i
-    ITL(c)
+    Interactive_Thon_Langauge(c)
