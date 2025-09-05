@@ -12,9 +12,9 @@ try:
             else:
                 if args[0]in["-d","--debug"]: debug=1
                 elif args[0]in["-h","--help"]: print("ITL Line Structure:"+" "*15+"Arguments:",
-                "py GSL <FILENAME> <ARGUMENTS>     ""-d --debug   Shows debug info",
+                "py GSL <FILENAME> <ARGUMENTS>     -d --debug   Shows debug info",
                 " "*34+"-h --help    Shows this help message",sep="\n");exit()
-                else:print("Structure incorrect:","Expected:  py GSL <FILENAME> <ARGUMENTS>",
+                else:print("Structure incorrect:\nExpected:  py GSL <FILENAME> <ARGUMENTS>",
                 f"Got:       {" ".join(argv)}",sep="\n");exit()
             args.pop(0)
 except IndexError:...
@@ -23,7 +23,7 @@ except IndexError:...
 class ITL():
     def lex(self,x:str)->list:
         #Make every command as an entry to the mapper 
-        z=[];p=0;o=q="";keys={
+        z=[];p=n=0;o=q="";keys={
             0  :[":"],         #Non-argumented keywords
             1  :["f"],         #One-argumented keywords
             "A":["give"],      #Any length
