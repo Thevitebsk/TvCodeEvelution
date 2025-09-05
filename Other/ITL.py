@@ -23,16 +23,19 @@ except IndexError:...
 class ITL():
     def lex(self,x:str)->list:
         #Make every command as an entry to the mapper 
-        p=n=0;o="";keys={
+        p=m=n=0;o="";keys={
             0  :[":"],         #Non-argumented keywords
             1  :["f"],         #One-argumented keywords
-            "A":["give"],      #Any length
-            "<":["(",")"]      #Space added before the symbol
-            };ts="<>,:";mapper=[]
+            "A":["give"]      #Any length
+            };ts="<:";mapper=[]
         for i in x:
-            if i in ts: o+=f" {i} "
-            elif i in keys["<"]: o+=f" {i}"
-            else:o+=i
+            if i=="\"":o+=i;m=int(not m)
+            elif i in ts: o+=f" {i} "
+            elif i in"()>": o+=f" {i}"
+            elif i in",":
+                if not m:o+=f" {i} " 
+                else:o+=i
+            else: o+=i
         y=o.strip().split()
         while p<len(y):
             #Get rid of comments and empty elements
@@ -40,7 +43,7 @@ class ITL():
                 y[p:y.index(">",p)+1]=""
                 if len(y)!=0: p=-1
                 else: break
-            elif y[p]=="":y[p]=""
+            elif y[p]=="":y[p]="\""
             else:...
             p+=1
 
@@ -57,19 +60,29 @@ class ITL():
                     p=y.index(")",p)+1
             else:mapper.append(y[p])
             n+=1;p+=1
+        if debug:print(mapper)
         return mapper
 
     def run(self,x:list):
+        def is_int(x):
+            try:int(x)
+            except ValueError:return False
+            else:return True
         funcs={};p=0
         while p!=len(x):
             y=x[p].split(" ")
             if y[0]=="f"and x[p+1][0]==":":funcs[y[1]]=p;p+=1
             elif y[0]=="give"and y[1]=="(":
-                z=" ".join(y[2:y.index(")")]).split(",")
+                z=" ".join(y[2:y.index(")")]).split(">")
                 for i in z:
-                    if i[0][-1]=="\"":print(i[1:-1])
+                    if i[0]=="\"":
+                        print(i[1:-2],end=" ");m=1
+                        if i[0]!="\""and m:print(i[1:-2],end=" ")
+                        elif i[0]=="\""and m:print();m=0
+                    elif is_int(i):print(i)
+                    else:print("...")
             p+=1
-        print(funcs)
+        if debug:print(funcs)
 
     def __init__(self,code): self.run(self.lex(code))
 print("""
@@ -83,8 +96,7 @@ print("""
 @@@   @@@   @@@
 @@@   @@@   @@@
 @@@   @@@   @@@@@@
-@@@   @@@   @@@@@@
-"""[1:-1])
+@@@   @@@   @@@@@@"""[1:])
 if not filein:ITL(c)
 else:
     while (i:=input("Interactive Thon Langaugeㅣ")):c+=i
