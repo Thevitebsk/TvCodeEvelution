@@ -24,10 +24,10 @@ class ITL():
     def lex(self,x:str)->list:
         #Make every command as an entry to the mapper 
         z=[];p=0;o=q="";keys={
-            0  :[":"],        #Non-argumented keywords
-            1  :["f"],        #One-argumented keywords
-            "A":["give"],     #Any length
-            "<":["(",")"]     #Space added before the symbol
+            0  :[":"],         #Non-argumented keywords
+            1  :["f"],         #One-argumented keywords
+            "A":["give"],      #Any length
+            "<":["(",")"]      #Space added before the symbol
             };ts="<>,:";mapper={}
         [o:=o+i if i not in ts else o+f" {i} "for i in x];[q:=q+i if i not in keys["<"]else q+f" {i}"for i in o]
         y=q.strip().split()
