@@ -25,9 +25,9 @@ class ITL():
         #Make every command as an entry to the mapper 
         p=m=n=0;o="";keys={
             0  :[":"],         #Non-argumented keywords
-            1  :["f"],         #One-argumented keywords
-            "A":["give"]      #Any length
-            };ts="<:";mapper=[]
+            1  :["f","r"],     #One-argumented keywords
+            "A":["give"]       #Any ammount of arguments
+            };ts="<:;";mapper=[]
         for i in x:
             if i=="\"":o+=i;m=int(not m)
             elif i in ts: o+=f" {i} "
@@ -44,6 +44,7 @@ class ITL():
                 if len(y)!=0: p=-1
                 else: break
             elif y[p]=="":y[p]="\""
+            elif y[p]==":":y.insert(p+2,y[p+1][1:]);y[p+1]=y[p+1][0]
             else:...
             p+=1
 
@@ -60,8 +61,7 @@ class ITL():
                     p=y.index(")",p)+1
             else:mapper.append(y[p])
             n+=1;p+=1
-        if debug:print(mapper)
-        return mapper
+        print(mapper)if debug else...;return mapper
 
     def run(self,x:list):
         def is_int(x):
@@ -71,7 +71,7 @@ class ITL():
         funcs={};p=0
         while p!=len(x):
             y=x[p].split(" ")
-            if y[0]=="f"and x[p+1][0]==":":funcs[y[1]]=p;p+=1
+            if y[0]=="f"and x[p+1][0]==":":funcs[y[1]]=[p,x[p+3].split(",")];p+=1
             elif y[0]=="give"and y[1]=="(":
                 z=" ".join(y[2:y.index(")")]).split(">")
                 for i in z:
@@ -96,7 +96,8 @@ print("""
 @@@   @@@   @@@
 @@@   @@@   @@@
 @@@   @@@   @@@@@@
-@@@   @@@   @@@@@@"""[1:])
+@@@   @@@   @@@@@@
+"""[1:-1])
 if not filein:ITL(c)
 else:
     while (i:=input("Interactive Thon Langaugeㅣ")):c+=i
