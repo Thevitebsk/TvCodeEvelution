@@ -5,18 +5,17 @@ except IndexError:filein=1;c=""
 except FileNotFoundError:print("ITL: The file selected doesn't exist");exit()
 try:
     if argv[2][0]=="-":
-        args=argv[2:]
         while 1:
-            try:args
+            try:argv[2:]
             except IndexError:break
             else:
-                if args[0]in["-d","--debug"]: debug=1
-                elif args[0]in["-h","--help"]: print("ITL Line Structure:"+" "*15+"Arguments:",
+                if argv[2:][0]in["-d","--debug"]: debug=1
+                elif argv[2:][0]in["-h","--help"]: print("ITL Line Structure:"+" "*15+"Arguments:",
                 "py GSL <FILENAME> <ARGUMENTS>     -d --debug   Shows debug info",
                 " "*34+"-h --help    Shows this help message",sep="\n");exit()
                 else:print("Structure incorrect:\nExpected:  py GSL <FILENAME> <ARGUMENTS>",
                 f"Got:       {" ".join(argv)}",sep="\n");exit()
-            args.pop(0)
+            argv[2:].pop(0)
 except IndexError:...
 
 # The actual implementation:
