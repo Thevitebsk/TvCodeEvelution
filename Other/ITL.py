@@ -81,12 +81,12 @@ class Interactive_Thon_Langauge():
                 for i in z:
                     try:
                         if i[0]=="\"":
-                            print(i[1:-2],end=" ");m=1
-                            if i[0]!="\""and m:print(i[1:-2],end=" ")
+                            print(i[1:-1],end=" ");m=1
+                            if i[0]!="\""and m:print(i[1:-1],end=" ")
                             elif i[0]=="\""and m:print();m=0
                         elif is_int(i):print(i)
                         else:print("...")
-                    except IndexError:print("")
+                    except IndexError:print("...")
             p+=1
         if debug:print(funcs)
 
