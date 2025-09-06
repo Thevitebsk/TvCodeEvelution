@@ -1,11 +1,14 @@
 from sys import argv
-p=n=filein=debug=0
+p=n=f=debug=0;a=1
 try:c=open(argv[1]).read()
-except IndexError:filein=1;c=""
-except FileNotFoundError:print("ITL: The file selected doesn't exist");exit()
+except IndexError:f=1;c=""
+except FileNotFoundError:
+    if argv[1][0]!="-":print("ITL: The file selected doesn't exist\n");exit()
+    else:c="";f=1
+else:a=2
 try:
-    if argv[2][0]=="-":
-        a=argv[2:]
+    if argv[a][0]=="-":
+        a=argv[a:]
         while 1:
             try:a
             except IndexError:break
@@ -76,12 +79,14 @@ class Interactive_Thon_Langauge():
             elif y[0]=="give"and y[1]=="(":
                 z=" ".join(y[2:y.index(")")]).split(">")
                 for i in z:
-                    if i[0]=="\"":
-                        print(i[1:-2],end=" ");m=1
-                        if i[0]!="\""and m:print(i[1:-2],end=" ")
-                        elif i[0]=="\""and m:print();m=0
-                    elif is_int(i):print(i)
-                    else:print("...")
+                    try:
+                        if i[0]=="\"":
+                            print(i[1:-2],end=" ");m=1
+                            if i[0]!="\""and m:print(i[1:-2],end=" ")
+                            elif i[0]=="\""and m:print();m=0
+                        elif is_int(i):print(i)
+                        else:print("...")
+                    except IndexError:print("")
             p+=1
         if debug:print(funcs)
 
@@ -99,7 +104,7 @@ print("""
 @@@   @@@   @@@@@@
 @@@   @@@   @@@@@@
 """[1:-1])
-if not filein:Interactive_Thon_Langauge(c)
-else:
+if f:
     while (i:=input("Interactive Thon Langaugeㅣ")):c+=i
     Interactive_Thon_Langauge(c)
+else:Interactive_Thon_Langauge(c)
