@@ -11,11 +11,9 @@ while len(c)>p:
  elif c[p]==":":s.append(c[p+1]);p+=1
  elif c[p]=="?":
   if str(s.pop())!=str(s.pop()):
-    s.append(0)
     if c[p+1]=="[":p=c.index("]",p)
     elif c[p+1]=="j":p+=2
     else:p+=1
-  else:s.append(1)
  elif c[p]=="@":s.append(input())
  elif c[p]=="|":
     if not s:print(c[p+1],end="");p+=1
@@ -34,4 +32,5 @@ while len(c)>p:
     p+=1
  elif c[p]==">":s.append(c[(x:=l2.pop())[0]:x[1]])
  elif c[p]=="=":s.append(s[-1])
+ elif c[p]=="_":c=c[:p]+str(s.pop())+c[p+1:]
  p+=1
