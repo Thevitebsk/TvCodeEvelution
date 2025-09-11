@@ -20,7 +20,7 @@ while len(c)>p:
     else:print(s.pop(),end="")
  elif c[p]=="j":
   try:p=l[c[p+1]]]
-  except ValueError:l[c[p+1]]=p+1
+  except KeyError:l[c[p+1]]=p+1
  elif c[p]=="\"":p=c.index("\"",p+1)
  elif c[p]in"0123456789":numb()
  elif c[p]=="{":
