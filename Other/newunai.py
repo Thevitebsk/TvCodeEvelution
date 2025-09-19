@@ -1,26 +1,19 @@
-# UNAI #
-codef = []; uin = []
-import sys,time
+# CFILORUX #
+codef = []
+from sys import argv;from time import time
 # Arguments
-try:codef=open(sys.argv[1]).read()
+try:codef=open(argv[1]).read()
 except:...
-else:
-  try:uin=open(sys.argv[2]).readlines()
-  except:...
 
 # Input
 stack = []; tempstack = []; point = force = 0; n = 1
 if not codef:
-  while 1:
-    code=input(f"{n}: ")
-    if code.strip() != "" : codef.append(code)
-    else: break
-    n+=1
+  while (code:=input(f"{n}: ")).strip()!="":codef.append(code);n+=1
 else: ...
-... if codef else exit()
+...if codef else exit()
 
 # The Language
-starttime=time.time()
+start=time()
 code = "\n".join(codef)
 # print(code)
 def numb()->str:
@@ -36,4 +29,4 @@ while len(code)>point:
   if code[point]in"0123456789":stack.append(int(numb()))
   elif code[point]==",":stack.append(input())
   point+=1
-print(stack,f"{time.time()-starttime:.3f} seconds")
+print(stack,f"{time()-start:.5f} seconds")
