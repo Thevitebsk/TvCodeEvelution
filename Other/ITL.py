@@ -38,17 +38,17 @@ class Interactive_Thon_Langauge():
         #Make every command as an entry to the mapper 
         p=m=n=0;o="";mapper=[]
         keys={
-            0  :[":"],         #Non-argumented keywords
-            1  :["f","r"],     #One-argumented keywords
-            "A":["give"]       #Any ammount of arguments
+            0:[":"],             #Non-argumented keywords
+            1:["f","r","give"],  #One-argumented keywords
         };ts="<:;"
         for i in x:
-            if i=="\"":o+=i;m=int(not m)
+            if i=="\"":m=int(not m)
             if not m:
                 if i in ts: o+=f" {i} "
                 elif i in"()>": o+=f" {i}"
                 elif i in",":o+=i
                 else: o+=i
+            elif m:o+=i
         y=o.strip().split()
         while p<len(y):
             #Get rid of comments and empty elements
@@ -57,26 +57,25 @@ class Interactive_Thon_Langauge():
                 if len(y)!=0: p=-1
                 else: break
             elif y[p]=="":y[p]="\""
-            elif y[p]==":":y.insert(p+2,y[p+1][1:]);y[p+1]=y[p+1][0]
+            elif y[p]==":":
+              try:y.insert(p+2,y[p+1][1:]);y[p+1]=y[p+1][0]
+              except IndexError:print("ITL: Name Error |"
+                " No function name was given");exit()
             else:...
             p+=1
 
         p=0
-        while p<len(y)-1:
-            #Check type of keyword
-            o=""
+        while p<len(y):
             if y[p]in keys[0]:mapper.append(y[p])
             elif y[p]in keys[1]:
                     mapper.append(y[p]+" "+y[p+1])
                     p+=1;y[p]=""
-            elif y[p]in keys["A"]:
-                    mapper.append("".join(y[p])+" ( "+" ".join(y[p+1:y.index(")",p)+1])[1:])
-                    p=y.index(")",p)+1
             else:mapper.append(y[p])
             n+=1;p+=1
         print(mapper)if debug else...;return mapper
 
     def run(self,x:list):
+        print(x)
         def is_int(x):
             try:int(x)
             except ValueError:return False
@@ -84,7 +83,7 @@ class Interactive_Thon_Langauge():
         funcs={};p=0
         while p!=len(x):
             y=x[p].split(" ")
-            if y[0]=="f"and x[p+1][0]==":":funcs[y[1]]=p;p+=1
+            if y[0]=="f"and x[p+1][0]==":": funcs[y[1]]=p;p+=1
             elif y[0]=="give"and y[1]=="(":
                 z=" ".join(y[2:y.index(")")]).split(">")
                 for i in z:
@@ -114,6 +113,6 @@ print("""
 @@@   ###   !!!!!!
 """[1:-1])
 if f:
-    while (i:=input(f"{n}: "))!="end":c+=i;n+=1
+    while (i:=input(f"{n}: "))!="end":c+=i+"\n";n+=1
     Interactive_Thon_Langauge(c)
 else:Interactive_Thon_Langauge(c)
