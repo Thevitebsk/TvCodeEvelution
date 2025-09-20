@@ -44,12 +44,11 @@ class Interactive_Thon_Langauge():
         };ts="<:;"
         for i in x:
             if i=="\"":o+=i;m=int(not m)
-            elif i in ts: o+=f" {i} "
-            elif i in"()>": o+=f" {i}"
-            elif i in",":
-                if not m:o+=f" {i} " 
-                else:o+=i
-            else: o+=i
+            if not m:
+                if i in ts: o+=f" {i} "
+                elif i in"()>": o+=f" {i}"
+                elif i in",":o+=i
+                else: o+=i
         y=o.strip().split()
         while p<len(y):
             #Get rid of comments and empty elements
@@ -92,11 +91,11 @@ class Interactive_Thon_Langauge():
                     try:
                         if i[0]=="\"":
                             print(i[1:-1],end=" ");m=1
-                            if i[0]!="\""and m:print(i[1:-1],end=" ")
+                            if i[0]!="\""and m:print(i.replace("\\\"","\\e"),end=" ")
                             elif i[0]=="\""and m:print();m=0
                         elif is_int(i):print(i)
-                        else:print("...")
-                    except IndexError:print("...")
+                        else:print("ITL: Invalid type");exit()
+                    except IndexError:print("ITL: Invalid type");exit()
             p+=1
         if debug:print(funcs)
 
