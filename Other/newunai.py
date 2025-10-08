@@ -1,4 +1,4 @@
-# CFILORUX #
+print("CFILORUX\n"+"-"*38)
 codef = []
 from sys import argv;from time import time
 # Arguments
@@ -20,12 +20,10 @@ def numb()->str:
   global point
   listnumb=[]
   while point!=len(code)and code[point]in"0123456789":
-    listnumb.append(code[point])
-    point+=1
+    listnumb.append(code[point]);point+=1
   return "".join(listnumb)
 
 while len(code)>point:
-  print(code[point])
   if code[point]in"0123456789":stack.append(int(numb()))
   elif code[point]==",":stack.append(input())
   point+=1
