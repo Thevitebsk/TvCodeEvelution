@@ -10,7 +10,7 @@ except:
 
 # The Language
 start=time()
-code = "\n".join(codef)
+code="\n".join(codef)
 # print(code)
 def numb()->str:
   global point
