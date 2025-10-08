@@ -1,5 +1,3 @@
-#m
-
 # --UNAI-- #
 import sys
 try:c=open(sys.argv[1]).read()
