@@ -14,7 +14,7 @@ while c<len(b)and e<512:
             c+=1
     elif b[c]=="PUT":a[int(b[c+1][1])]=int(input("\n"))%256;c+=1
     elif b[c]=="JIR":
-        if a[int(b[c+2][1])]==int(b[c+3]):
+        if a[int(b[c+2][1])]==int(b[c+3])%256:
             i=b[c+1];c=0;j=b[0:c].count("i")
             while c<len(b):
                 if b[c]==";"+i and not j:break
