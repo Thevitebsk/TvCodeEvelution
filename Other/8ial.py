@@ -3,7 +3,7 @@ for f in range(1,17):a[f]=0
 try:g=open(sys.argv[1]).readlines()
 except(FileNotFoundError,IndexError):exit()
 for h in g:[b.append(i)for i in h.split()]
-while c<len(b)and e<512:
+while c<len(b)and e<4096:
     if b[c]=="INC":a[int(b[c+1][1])]=(a[int(b[c+1][1])]+1)%256;c+=1
     elif b[c]=="PSH":d.append(a[int(b[c+1][1])]);c+=1
     elif b[c]=="OUT":print(d.pop(),end=" ")
