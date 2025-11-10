@@ -19,6 +19,6 @@ while B!=len(A):
   elif A[B]in["she","her"]:C.append("rsel")
   elif A[B]in["it","this","they","them"]:C.append("isel")
   elif A[B][0:3]=="pay"and A[B+1]=="attention":C.append("scaselet");B+=1
-  elif A[B]in["here","there"]:C[-1]+="ui";C.append("place")
+  elif A[B]in["here","there"]:C[-1]+="ui";C.append("wy")
   B+=1
 print("   ITAC: "+" ".join(C)if C else None)
