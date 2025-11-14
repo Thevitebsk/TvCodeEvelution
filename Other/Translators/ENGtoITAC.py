@@ -20,11 +20,11 @@ while B!=len(A):
   elif A[B]in["it","this","they","them"]:C.append("isel")
   elif A[B][0:3]=="pay"and A[B+1]=="attention":C.append("scaselet");B+=1
   elif A[B]in["here","there"]:
-  		 if C:C[-1]+="ui";C.append("wy")
-  		 else:()
+    if C:C[-1]+="ui";C.append("wy")
+    else:()
   elif A[B]=="place":C.append("iselui")
   elif A[B]=="is":
-  		 if A[B+1]!="by":C[-1]+="h"
-  		 else:C[-1]+="for";B+=1
+    if A[B+1]!="by":C[-1]+="h"
+    else:C[-1]+="for";B+=1
   B+=1
 print("   ITAC: "+" ".join(C)if C else None)
