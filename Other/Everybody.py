@@ -25,7 +25,6 @@ def evaluate(arg)->bool:
         else:
             return bool(variables[ayl[0][1::]])
 
-p=0
 try:
     while code[p]!="Hello everyone!": p+=1
 except IndexError:
