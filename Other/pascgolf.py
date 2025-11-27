@@ -1,5 +1,3 @@
-#IeLe.py (snippet)
-
 print("Pascgolf")
 i=input("Input your code:\n");p=o=0
 v={};out=""
@@ -17,7 +15,7 @@ try:
             try:out+=v[i[p+2]]+" "
             except KeyError: print(f"No varible named \"{i[p+2]}\" exists")
             p+=2
-      else:print(f"not a valid pascgolf command \"{i[p]}\" -> {p}");exit()
+      else:print(f"not a valid pascgolf command \"{i[p]}\" -> pos: {p}");exit()
       if o==-1:break
       p+=1
 except IndexError:print("Program did not encounter an end statement!");exit()
