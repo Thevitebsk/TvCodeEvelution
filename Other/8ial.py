@@ -1,4 +1,4 @@
-import sys;a={};b=[];c=0;d=0
+import sys;a={};b=[];c=d=0
 for e in range(1,17):a[e]=0
 try:f=open(sys.argv[1]).readlines()
 except(FileNotFoundError,IndexError):print("not file was chosen")
