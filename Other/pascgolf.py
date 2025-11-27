@@ -1,13 +1,13 @@
-print("Pascgolf")
 i=input("Input your code:\n");p=o=0
 v={};out=""
 try:
    while 1:
+      if i[p]=="v": v[i[p+1]]=i[p+2:i.index(";",p)];p=i.index(";",p)
+      if i[p]==";"and p==len(i)-1:break
       if i[p]not in"["and o==0:print("command not in brackets");exit()
-      elif i[p]=="]"and p==len(i)-1: o=-1+1
+      if i[p]=="]"and p==len(i)-1: o=0
       if i[p]=="[": o+=1
       elif i[p]=="]": o-=1
-      elif i[p]=="v": v[i[p+1]]=i[p+2:i.index(";",p)];p=i.index(";",p)
       elif i[p]==".":
          if i[p+1]=="\"":
             out+=i[p+2:i.index("\"",p+2)]+" ";p=i.index("\"",p+2)
@@ -19,4 +19,4 @@ try:
       if o==-1:break
       p+=1
 except IndexError:print("Program did not encounter an end statement!");exit()
-print(out)
+print(out if out else None)
