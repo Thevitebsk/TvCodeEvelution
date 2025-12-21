@@ -1,7 +1,7 @@
 import sys;a={};b=[];c=d=0
 for e in range(1,17):a[e]=0
 try:f=open(sys.argv[1]).readlines()
-except(FileNotFoundError,IndexError):print("no file was chosen")
+except(FileNotFoundError,IndexError):print("no file was chosen");exit()
 for g in f:[b.append(i)for i in g.split()]
 def h(x:str):
     try:int(x);return True
