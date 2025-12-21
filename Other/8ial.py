@@ -26,6 +26,6 @@ while b[c]!="END"and d<4096:
         else:c+=3
     elif b[c]=="DEC":a[int(b[c+1][1:])]=(a[int(b[c+1][1:])]-1)%256;c+=1
     elif b[c][0]in[";","$"]:...
-    else:print(f"undefined instruction",b[c],c);break
+    else:print(f"undefined instruction \"{b[c]}\"",c);break
     c+=1;d+=1
 print(f"\nOP:{len(b):>18}\nACTUAL BYTESIZE:   {len(open(sys.argv[1]).read())}")
