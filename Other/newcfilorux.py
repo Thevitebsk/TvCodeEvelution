@@ -5,10 +5,10 @@ from sys import argv;from time import time
 # Input
 stack=[]; point=n=0
 try:codef=open(argv[1]).read()
-except:
+except (IndexError,FileNotFoundError):
   while (code:=input(f"{n+1}: ")).strip()!="":codef.append(code);n+=1
 try:m=int(open(argv[2]).read())
-except:m=4096
+except IndexError:m=4096
 
 # The Language
 start=time();out=""
