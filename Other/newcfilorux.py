@@ -1,34 +1,44 @@
 print("CFILORUX\n"+"-"*38)
-t=[];codef=[]
+t=[];c=[]
 from sys import argv;from time import time
 
 # Input
-stack=[]; point=n=0
-try:codef=open(argv[1]).read()
-except (IndexError,FileNotFoundError):
-  while (code:=input(f"{n+1}: ")).strip()!="":codef.append(code);n+=1
+s=[]; p=n=0
+try:c=[open(argv[1]).read()]
+except(IndexError,FileNotFoundError):
+  while (code:=input(f"{n+1}: ")).strip()!="":c.append(code);n+=1
 try:m=int(open(argv[2]).read())
 except IndexError:m=4096
 
 # The Language
+c=" ".join(c)
 start=time();out=""
-code="\n".join(codef)
 la={}
 def numb()->str:
-  global point
+  global p
   l=[]
-  while point!=len(code)and code[point]in"0123456789":l.append(code[point]);point+=1
-  point-=1;return int("".join(l))
+  while p!=len(c)and c[p]in"0123456789":l.append(c[p]);p+=1
+  p-=1;return int("".join(l))
+def is_int(x)->bool:
+  try:int(x);return True
+  except:return False
 
-n=0
-while len(code)>point and n<m:
-  if code[point]in"0123456789":stack.append(numb())
-  elif code[point]==",":t.append(f"{time()-start:.5f}");stack.append(input());start=time()
-  elif code[point]==".":out+=str(stack.pop())
-  elif code[point]=='"':stack.append(code[point+1:(point:=code.index('"',point+1))])
-  elif code[point]=="(":la[code[point+1:(point:=code.index(')',point+1))]]=point
-  elif code[point]=="!":point=la[stack.pop()]
-  point+=1;n+=1
+n=n2=o=0
+while len(c)>p and n<m:
+  if c[p]in"0123456789":s.append(numb())
+  elif c[p]==",":t.append(f"{time()-start:.5f}");s.append(input());start=time()
+  elif c[p]==".":out+=str(s.pop())
+  elif c[p]=='"':s.append(c[p+1:c.index('"',p+1)]);p=c.index('"',p+1)
+  elif c[p]=="(":
+    n2+=1;la[n2]=p+1
+    p+=1
+    while o>-1 and len(c)!=p:
+      o+=(1*c[p]=="(")-(1*c[p]==")")
+      p+=1
+    p-=1
+  elif c[p]==":":s.append(s[-1])
+  print(s,c[p])
+  p+=1;n+=1
 
 x=time()-start;[x:=x+float(i)for i in t]
 print("-"*38+"\n"+out if out else None)
