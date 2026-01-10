@@ -7,28 +7,23 @@ try:code = open(sys.argv[1]).readlines()
 except IndexError:print("no file was used"); exit()
 
 p=0
-code=[i.strip()for i in code]
+code=[i.strip().replace("->"," -> ")for i in code]
 
 def evaluate(arg)->bool:
     def is_int(x)->bool:
-        try:int(x)
+        try:int(x);return True
         except ValueError:return False
-        return True
-    a=arg[0][:-1]
-    ayl=a.replace("->"," -> ").split(" ")
 
-    if len(ayl)==1 and is_int(ayl[0]):
-        return bool(int(ayl[0]))
-    elif len(ayl)==1 and ayl[0][0]=="@":
-        if is_int(variables[ayl[0][1::]]):
-            return bool(int(variables[ayl[0][1::]]))
-        else:
-            return bool(variables[ayl[0][1::]])
+    a=variables[arg[1::]]
+    if is_int(arg):
+        return bool(int(arg))
+    elif arg[0]=="@":
+        return bool(int(a)if is_int(a)else a)
 
 try:
     while code[p]!="Hello everyone!": p+=1
 except IndexError:
-    print("ERROR INFO:\n"+
+    print("ERROR INFO:\n"
           "No starting point found");exit()
 
 while p!=len(code):
@@ -38,9 +33,16 @@ while p!=len(code):
         variables[c[0][1:-1]]=input()
     
     elif code[p].startswith("Quick question,")and code[p].endswith("If so, then:"):
-        if bool(evaluate(c[2:-3][0:len(c)-2])):...
+        x=c[2:-3];x[-1]=x[-1][0:-1]
+        if len(x)>1:
+            x.pop(1)
+            try:x[1]=evaluate(x[1])
+            except IndexError:x[1]=False
+        else:x.append(True)
+        x[0]=evaluate(x[0])
+        if x[0]==x[1]:...
         else:
-            while code[p].strip().split(" ")[0]!="End" and p!=len(code): p+=1
+            while code[p].strip().split(" ")[0]!="End"and p!=len(code): p+=1
             p-=1
     
     elif c[0]=="|":
@@ -48,21 +50,21 @@ while p!=len(code):
             if c[5][0]==">":variables[c[1][1:]]=chr(int(c[5][1:]))
             variables[c[1][1:]]=" ".join(c[5:])
         else:...
-    elif " ".join(c[0:3])=="Please go to":
+    elif" ".join(c[0:3])=="Please go to":
         p=0;target=c[-1]
         try:
             while (c:=code[p].strip().split(" ")[0])!=f"{target}:": p+=1
         except IndexError:print(f"ERROR INFO:\nNo label named {target} was found")
     
-    elif " ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
+    elif" ".join(c[0:3])=="Say the number"and c[-1][-1]=="!":
         try:print(int(variables[c[-1][1:-1]]),end=" ")
         except ValueError:print(f"ERROR INFO:\n{c[-1][1:-1]}:\n"
-                               +f"| Say the number @{c[-1][1:-1]}!\n"
-                                +"I am not even a number");exit()
+                               f"| Say the number @{c[-1][1:-1]}!\n"
+                                "I am not even a number");exit()
         except KeyError:print(f"ERROR INFO:\nYou:\nSay the number @{c[-1][1:-1]}!\n"
-                              +"\nYou:\nOh right they aren't here");exit()
+                              "\nYou:\nOh right they aren't here");exit()
     
-    elif " ".join(c[0:3])=="Say the phrase"and c[-1][-1]=="!":
+    elif" ".join(c[0:3])=="Say the phrase"and c[-1][-1]=="!":
         try:
             if variables[c[-1][1:-1]][0]=="\"":
                 print(variables[c[-1][1:-1]][1:-1],end=" ")
@@ -73,8 +75,8 @@ while p!=len(code):
         except KeyError:
             if c[-1][0]=="@":
                 print(f"ERROR INFO:\nYou:\nSay the phrase @{c[-1][1:-1]}!\n"
-                      +"\nYou:\nOh right they aren't here");exit()
-            elif " ".join(c[3:])[0]=="\"": print(" ".join(c[3:])[1:-2],end=" ")
+                      "\nYou:\nOh right they aren't here");exit()
+            elif" ".join(c[3:])[0]=="\"": print(" ".join(c[3:])[1:-2],end=" ")
             else:
                 try:print(int(" ".join(c[3:])[:-1]),end=" ")
                 except ValueError:
