@@ -1,7 +1,7 @@
 #QBiA.py
 
 print("@@@ @@@ @@@\n@   @   @ @\n@@@ @@@ @ @\n@     @ @ @\n@@@ @@@ @@@")
-print("\nA collection of interpriters of esolangs made by Gaham\n")
+print("\nA collection of implementations of esolangs made by Gaham\n")
 while True:
     i=input("input an esolangs name:").lower()
     if i=="brainfuck":
