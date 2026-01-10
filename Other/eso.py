@@ -1,98 +1,43 @@
 #QBiA.py
 
-print("@@@ @@@ @@@")
-print("@   @   @ @")
-print("@@@ @@@ @ @")
-print("@     @ @ @")
-print("@@@ @@@ @@@")
+print("@@@ @@@ @@@\n@   @   @ @\n@@@ @@@ @ @\n@     @ @ @\n@@@ @@@ @@@")
 print("\nA collection of interpriters of esolangs made by Gaham\n")
-cs=" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]`abcdefghijklmnopqrstuvwxyz{|}~"
-cl=0
-def cls():
-    global cl
-    while cl!=70:
-        print("\n")
-        cl+=1
-    cl=0
-def bf():
-    cls()
-    c=[0]*8
-    p=0
-    while True:
-        p=0
-        c=[0]*8
-        for bfi in input('bf:'):
-            if bfi==">":
-                p+=1
-                if p>8:
-                    print("OUT OF RANGE")
-                    p=0
-            elif bfi=="<":
-                p-=1
-                if p<0:
-                    p=8
-                    print("OUT OF RANGE")
-            elif bfi == "+":
-                c[p]+=1
-                if c[p]>102:
-                    c[p]=0
-            elif bfi == "-":
-                c[p]-=1
-                if c[p]==0:
-                    c[p]=102
-            elif bfi == ".":
-                print(cs[c[p]])
-            elif bfi == ",":
-                c[p]=int(input("num:"))
-        if bfi == "E":
-            break
-def eson():
-    cls()
-    print("@@@@ @@@@      @  @")
-    print("@    @         @@ @")
-    print("@@@@ @@@@ @@@@ @ @@")
-    print("@       @ @  @ @  @")
-    print("@@@@ @@@@ @@@@ @  @")
-    print("Esoteric Sequence of Numbers. An original esolang by Ractangle")
-    while True:
-        ac=0
-        s=[]
-        global aac
-        aac=0
-        tv=0
-        for esoni in input("ESoN:"):
-            if esoni == "1":
-                ac += 1
-                if ac>128:
-                    ac=-128
-            if esoni == "2":
-                print(s)
-            if esoni=="3":
-                ac-=1
-                if ac<-128:
-                    ac=128
-            if esoni=="4":
-                ac=tv
-                acc=ac
-                tv=acc
-            if esoni=="5":
-                print(acc)
-            if esoni=="6":
-                if ac==acc in s:
-                    s.append(0)
-                else:
-                    s.append(1)
-            if esoni == "7":
-                s.append(ac)
-            if esoni == "8":
-                s.append(acc)
-        if esoni == "E":
-            break
 while True:
-    eso=input("input an esolangs name:")
-    if eso=="brainfuck":
-        bf()
-    elif eso=="ESoN":
-        eson()
-    else:
-        print("This Esolang is uninterpreterd or doesn't exist or you made a speling mistake")
+    i=input("input an esolangs name:").lower()
+    if i=="brainfuck":
+        print("\n"*50)
+        while True:
+            p=0
+            c=[0]*256
+            for j in input('bf:').upper():
+                if j==">":p+=1;p%=len(c)
+                if j==">":p-=1;p%=len(c)
+                elif j=="+":c[p]+=1;c[p]%=256
+                elif j=="-":c[p]-=1;c[p]%=256
+                elif j==".":print(chr(c[p]))
+                elif j==",":c[p]=int(input())
+            if j=="E":break
+    elif i=="eson":
+        print("\n"*50)
+        print("@@@@ @@@@      @  @\n@    @         @@ @\n@@@@ @@@@ @@@@ @ @@\n@       @ @  @ @  @\n@@@@ @@@@ @@@@ @  @")
+        print("Esoteric Sequence of Numbers. An original esolang by Ractangle")
+        while True:
+            s=[]
+            a=b=0
+            for j in input("ESoN:").upper():
+                if j == "1":
+                    a+=1
+                    if a>128:a=-128
+                if j=="2":
+                    a-=1
+                    if a<-128:a=128
+                if j=="3":a,b=b,a
+                if j=="4":s.append(str(int(int(s.pop())==int(s.pop()))))
+                if j=="5":s.append(str(a))
+            if j == "E":break
+            print(" ".join(s)+"\n"if s else"",end="")
+    elif i=="":break
+    else:print("This Esolang is either:\n"
+    "A.Is not implemented\n"
+    "B.Doesn't have a source of existence\n"
+    "C.You misspeled the name")
