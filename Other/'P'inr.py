@@ -24,7 +24,7 @@ while len(c)>p:
  elif c[p]=="\"":p=c.index("\"",p+1)
  elif c[p]in"0123456789":numb()
  elif c[p]=="{":
-  cb+1;tp=p
+  cb+=1;tp=p
   while 1:
     if c[p]=="}":
       if not cb:s.append(c[tp+1:c.index("}",p)]);break
