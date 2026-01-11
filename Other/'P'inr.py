@@ -8,7 +8,7 @@ def numb()->int:
   p-=1;s.append(int("".join(ln)))
 while len(c)>p:
  if c[p]==";":break
- elif c[p]==":":s.append(c[p+1]);p+=1
+ elif c[p]==":":s.append(s[-1])
  elif c[p]=="?":
   if str(s.pop())!=str(s.pop()):
     if c[p+1]=="[":p=c.index("]",p)
@@ -32,5 +32,8 @@ while len(c)>p:
     p+=1
  elif c[p]=="=":s.append(s[-1])
  elif c[p]=="_":c=c[:p]+str(s.pop())+c[p+1:];p-=1
- elif c[p]in(a:=["+","-","*","/"]):s.append(eval(str(s.pop())+a[a.index(c[p])]+str(s.pop())))
+ elif c[p]in(a:=["+","-","*","/"]):
+   try:s.append(eval(str(s.pop())+a[a.index(c[p])]+str(s.pop())))
+   except IndexError:...
+ elif c[p]=="x":s.pop()
  p+=1
