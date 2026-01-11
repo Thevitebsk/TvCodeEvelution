@@ -32,4 +32,5 @@ while len(c)>p:
     p+=1
  elif c[p]=="=":s.append(s[-1])
  elif c[p]=="_":c=c[:p]+str(s.pop())+c[p+1:];p-=1
+ elif c[p]in(a:=["+","-","*","/"]):s.append(eval(str(s.pop())+a[a.index(c[p])]+str(s.pop())))
  p+=1
