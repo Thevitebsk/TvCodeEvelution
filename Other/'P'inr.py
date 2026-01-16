@@ -21,7 +21,7 @@ while len(c)>p:
  elif c[p]=="j":
   try:p=l[c[p+1]]
   except KeyError:l[c[p+1]]=p+1
- elif c[p]=="\"":p=c.index("\"",p+1)
+ elif c[p]=="\"":s.append(c[p+1:c.index("\"",p+1)]);p=c.index("\"",p+1)
  elif c[p]in"0123456789":numb()
  elif c[p]=="{":
   cb+=1;tp=p
