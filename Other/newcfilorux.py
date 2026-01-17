@@ -14,14 +14,14 @@ except IndexError:m=4096
 c=" ".join(c)
 start=time();out=""
 la={}
-def numb()->str:
-  global p
-  l=[]
-  while p!=len(c)and c[p]in"0123456789":l.append(c[p]);p+=1
-  p-=1;return int("".join(l))
 def is_int(x)->bool:
   try:int(x);return True
   except:return False
+def numb()->str:
+  global p
+  l=[]
+  while p!=len(c)and is_int(c[p]):l.append(c[p]);p+=1
+  p-=1;return int("".join(l))
 
 n=n2=o=0
 while len(c)>p and n<m:
@@ -29,15 +29,7 @@ while len(c)>p and n<m:
   elif c[p]==",":t.append(f"{time()-start:.5f}");s.append(input());start=time()
   elif c[p]==".":out+=str(s.pop())
   elif c[p]=='"':s.append(c[p+1:c.index('"',p+1)]);p=c.index('"',p+1)
-  elif c[p]=="(":
-    n2+=1;la[n2]=p+1
-    p+=1
-    while o>-1 and len(c)!=p:
-      o+=(1*c[p]=="(")-(1*c[p]==")")
-      p+=1
-    p-=1
   elif c[p]==":":s.append(s[-1])
-  print(s,c[p])
   p+=1;n+=1
 
 x=time()-start;[x:=x+float(i)for i in t]
