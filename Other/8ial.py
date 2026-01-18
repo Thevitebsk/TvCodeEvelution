@@ -1,31 +1,32 @@
-import sys;a={};b=[];c=d=k=0
-for e in range(1,17):a[e]=0
+import sys;regs={};ops=[];p=d=ne=0
+for _ in range(1,17):regs[_]=0
 try:f=open(sys.argv[1]).readlines()
 except(FileNotFoundError,IndexError):print("no file was chosen");exit()
-for g in f:[b.append(i)for i in g.split()]
-def h(x:str):
+for _ in f:[ops.append(_2)for _2 in _.split()]
+def is_int(x:str):
     try:int(x);return True
     except:return False
-while b[c]!="END"and d<4096:
-    if b[c]=="INC":a[int(b[c+1][1:])]=(a[int(b[c+1][1:])]+1)%256;c+=1
-    elif b[c]=="OUT":print(a[int(b[c+1][1:])],end=" ");c+=1;k=1
-    elif b[c]=="JMP":
-        i=b[c+1];c=0;j=b[0:c].count("i")
-        while c!=len(b):
-            if b[c]==";"+i and not j:break
-            c+=1
-        else:print(f"no label \"{i}\" found",c);break
-    elif b[c]=="PUT":a[int(b[c+1][1:])]=int(input("\n"*k))%256;c+=1;k=0
-    elif b[c]=="JIR":
-        if a[int(b[c+2][1:])]==(int(b[c+3])if h(b[c+3])else a[int(b[c+3][1:])])%256:
-            i=b[c+1];c=0;j=b[0:c].count("i")
-            while c!=len(b):
-                if b[c]==";"+i and not j:break
-                c+=1
-            else:print(f"no label \"{i}\" found",c);break
-        else:c+=3
-    elif b[c]=="DEC":a[int(b[c+1][1:])]=(a[int(b[c+1][1:])]-1)%256;c+=1
-    elif b[c][0]in[";","$"]:...
-    else:print(f"undefined instruction \"{b[c]}\"",c);break
-    c+=1;d+=1
-print(f"\nOP:{len(b):>18}\nACTUAL BYTESIZE:   {len(open(sys.argv[1]).read())}")
+def eval(x):return int(x,16)%16 if is_int(x)else int(regs[int(x[1:])]%256)
+while ops[p]!="END"and d<4096:
+    if ops[p]=="INC":regs[int(ops[p+1][1:])]=(regs[int(ops[p+1][1:])]+1)%256;p+=1
+    elif ops[p]=="OUT":print(regs[int(ops[p+1][1:])],end=" ");p+=1;ne=1
+    elif ops[p]=="JMP":
+        i=ops[p+1];p=0;j=ops[0:p].count("i")
+        while p!=len(ops):
+            if ops[p]==";"+i and not j:break
+            p+=1
+        print(f"no label \"{i}\" found");break
+    elif ops[p]=="PUT":regs[int(ops[p+1][1:])]=int(input("\n"*ne))%256;p+=1;ne=0
+    elif ops[p]=="JIR":
+        if eval(ops[p+2])==eval(ops[p+3]):
+            i=ops[p+1];p=0;j=ops[0:p].count("i")
+            while p!=len(ops):
+                if ops[p]==";"+i and not j:break
+                p+=1
+            print(f"no label \"{i}\" found");break
+        else:p+=3
+    elif ops[p]=="DEC":regs[int(ops[p+1][1:])]=(regs[int(ops[p+1][1:])]-1)%256;p+=1
+    elif ops[p][0]in[";","$"]:...
+    else:print(f"undefined instruction \"{ops[p]}\"",p);break
+    p+=1;d+=1
+print(f"\nOP:{len(ops):>18}\nACTUAL BYTESIZE:   {len(open(sys.argv[1]).read())}")
