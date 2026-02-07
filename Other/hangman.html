@@ -1,0 +1,44 @@
+<h1>HANGMAN!</h1>
+<p id=output>Input a word bellow</p>
+<input type=type id="input"></input>
+<input type=submit onclick="state()"></input>
+<script>
+get=x=>document.getElementById(x)
+guesstext="placeholder"
+var stat=guesses=0
+var finished=false
+guess=function(i,j){
+    isCorrect=false
+    char=i[0]
+    indexes=[]
+    for(var pos=0;pos<j.length;pos++){
+        if (j[pos]==char){
+            indexes.push(pos)
+            guesstext=guesstext.slice(1)
+        }
+    }
+    if (indexes.length){
+        get('output').innerHTML=char+" is at indexes "+indexes
+    } else {
+        get('output').innerHTML=char+" is not in the word"
+    }
+    guesses++
+}
+state=function(){
+    if (!stat){
+        ginput=get('input').value
+        if (ginput.length){
+            get('output').innerHTML="Input a letter bellow"
+            guesstext="_".repeat(ginput.length)
+            stat++
+        }
+    }
+    else {
+        if (guesstext.length){ guess(get('input').value,ginput) }
+        else { 
+            get('output').innerHTML=
+            "You finished a Hangman game in "+guesses+" try/tries!"
+        }
+    }
+}
+</script>
