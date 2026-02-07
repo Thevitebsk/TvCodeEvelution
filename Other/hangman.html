@@ -1,28 +1,36 @@
 <h1>HANGMAN!</h1>
 <p id=output>Input a word bellow</p>
-<input type=type id="input"></input>
-<input type=submit onclick="state()"></input>
+<input type=type id="input">
+<input type=submit onclick="state()">
 <script>
 get=x=>document.getElementById(x)
-guesstext="placeholder"
+guesstext=""
 var stat=guesses=0
 var finished=false
-guess=function(i,j){
+var used=[]
+guess=function(inp,cntxt){
     isCorrect=false
-    char=i[0]
+    char=inp[0]
     indexes=[]
-    for(var pos=0;pos<j.length;pos++){
-        if (j[pos]==char){
+    for(var pos=0;pos<cntxt.length;pos++){
+        if (cntxt[pos]==char&&!used.includes(char)){
             indexes.push(pos)
             guesstext=guesstext.slice(1)
         }
     }
+    used.push(char)
     if (indexes.length){
         get('output').innerHTML=char+" is at indexes "+indexes
+    } else if (used.includes(char)) {
+        get('output').innerHTML=char+" was already used"
     } else {
         get('output').innerHTML=char+" is not in the word"
     }
     guesses++
+    if (!guesstext.length){
+        get('output').innerHTML=
+            "You finished a Hangman game in "+guesses+" try/tries!"
+    }
 }
 state=function(){
     if (!stat){
@@ -35,10 +43,6 @@ state=function(){
     }
     else {
         if (guesstext.length){ guess(get('input').value,ginput) }
-        else { 
-            get('output').innerHTML=
-            "You finished a Hangman game in "+guesses+" try/tries!"
-        }
     }
 }
 </script>
