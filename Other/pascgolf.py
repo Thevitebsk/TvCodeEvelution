@@ -1,22 +1,23 @@
-i=input("Input your code:\n");p=o=0
+i=input("Input your code:\n");p=o=0;BACK=False
 v={};out=""
+def evalpascgolf(x):
+   global p
+   res=""
+   if x[0]=='"':
+      p+=1
+      while i[p+1]!='"': res+=i[p+1]; p+=1
+      p+=1; return str(res)
+   elif x[0]=="v":
+      try:p+=3; return str(v[x[1]])
+      except KeyError: print(f"No varible named \"{i[p+2]}\" exists")
+   else: print("This type doesn't exist");return False
 try:
    while 1:
-      if i[p]=="v": v[i[p+1]]=i[p+2:i.index(";",p)];p=i.index(";",p)
-      if i[p]==";"and p==len(i)-1:break
-      if i[p]not in"["and o==0:print("command not in brackets");exit()
-      if i[p]=="]"and p==len(i)-1: o=0
-      if i[p]=="[": o+=1
-      elif i[p]=="]": o-=1
-      elif i[p]==".":
-         if i[p+1]=="\"":
-            out+=i[p+2:i.index("\"",p+2)]+" ";p=i.index("\"",p+2)
-         if i[p+1]=="v":
-            try:out+=v[i[p+2]]+" "
-            except KeyError: print(f"No varible named \"{i[p+2]}\" exists")
-            p+=2
-      else:print(f"not a valid pascgolf command \"{i[p]}\" -> pos: {p}");exit()
-      if o==-1:break
-      p+=1
+      if i[p]=="v": v[i[p+1]]=i[p+2:i.index(";",p)]; p=i.index(";",p)+1; BACK=True
+      elif i[p]==";"and p==len(i)-1: break
+      elif i[p]==".": out+=evalpascgolf(i[p+1:p+3])
+      else: print(f"not a valid pascgolf command \"{i[p]}\" -> pos: {p+1}");exit()
+      if not BACK:p+=1
+      else:BACK=False
 except IndexError:print("Program did not encounter an end statement!");exit()
 print(out if out else None)
