@@ -1,6 +1,13 @@
-#j7Vl.py
+#6jCW.py
 
-import os
+from os import *
+dir=path.join(path.dirname(path.abspath(__file__)), "ESO")
+if path.exists(dir) and path.isdir(dir):...
+else:
+  print("Please include an \"ESO\" folder to save your codes for further use"
+      ,"Ending sesion\n",sep="\n")
+  exit()
+
 print("@@@ @@@ @@@\n"+
       "@   @   @ @\n"+
       "@@@ @@@ @ @\n"+
@@ -8,10 +15,12 @@ print("@@@ @@@ @@@\n"+
       "@@@ @@@ @@@\n"+
       "\nA collection of interpriters made by Gaham\n")
 
-try: open("/".join(os.path.dirname(os.path.abspath(__file__)).split(chr(0x5c))[0::])+"/ESO")
-except: print("Please include an \"ESO\" folder for storing information after your ESO sesion");exit()
-
 while 1:
   i=input(">>  ").upper()
+  print(i.split(" ")[1::])
   if i=="END":print("Ending sesion\n");exit()
-  elif i=="GAL":print("Launching \"Gatari's Assembly Language\"")
+  elif i.split(" ")[0]=="START":
+    try:i.split(" ")[1]
+    except IndexError:print("START expected 1 argument (0 were given)")
+    else:
+      if i.split(" ")=="8IAL":print("Starting \"8 Instruction Assembly Language\"")
