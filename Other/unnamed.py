@@ -1,12 +1,12 @@
 stack=[];var={}
 out="";code="""
 
-""".strip()
-s=tr=p=0
+"""
+s=0;tr=0;p=0;code=code[1:len(code)-1]
 if code=="":s=1;out+=input()
-while len(code)!=p and not s:
+while len(code)>p and s==0:
  if len(out)>1023:tr=1;break
- if code[p]in"0123456789":stack.append(int(code[p]))
+ if code[p]in list(map(str,range(10))):stack.append(int(code[p]))
  if code[p]=="•":var[code[p+1]]=stack.pop()
  if code[p]==",":
   try:
@@ -16,4 +16,4 @@ while len(code)!=p and not s:
  p+=1
 print("~"*15+" RESULT "+"~"*15)
 print(out,"~"*38,"STACK: "+str(stack),"VARIABLES: "+str(var),sep="\n")
-if tr:print("T")
+if tr:print("TRUNCATED")
