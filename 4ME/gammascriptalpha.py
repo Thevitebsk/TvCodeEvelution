@@ -5,7 +5,6 @@ class gs(object):
          "\n"+"-"*32,"\nbPROGRAM ENDED AND RETURNED AN ERROR"
         )
         except (ValueError,TypeError):0
-        else:0
     def tokenize(self,code):
         tokes=[]
         pointer=0
