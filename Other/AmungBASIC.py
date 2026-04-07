@@ -1,4 +1,3 @@
-import typing
 lines=[]
 print("""
   *                       ***
@@ -11,14 +10,9 @@ print("""
 A basic-like programming language based on a Language Mockup i made in
 See also:https://mockupedia.miraheze.org/wiki/AmungfBASIC
 
-(PROTOTYPE, CREATOR MAY LEAK THIS IF HE WANTS TO)
 ======================================================================
 AmungBASIC VERSION 3.1 3,5 inch floppy disk""")
 class AmungBASIC(object):
-    def split_all(self,string:str,symbols:list[str]):
-        for _ in symbols:
-            string=string.replace(_,f' {_} ')
-        return string
     def __init__(self,code):
         for _ in code:
             try:
@@ -27,46 +21,47 @@ class AmungBASIC(object):
             except(ValueError,TypeError):0
     def tokenize(self,code):
         tokes=[]
-        pointer=0
-        code=self.split_all(code,["=","[","]"]).split()
-        while pointer!=len(code):
-            if code[pointer]=="print":
+        p=0
+        for _ in ["=","[","]"]:
+            code=code.replace(_,f' {_} ')
+        code=code.split()
+        while p!=len(code):
+            if code[p]=="print":
                 tokes.append("print")
-            elif code[pointer]in"[]":
+            elif code[p]in"[]":
                 tokes.append("bracket")
             else:
-                tokes.append(['id',code[pointer]])
-            pointer+=1
+                tokes.append(['id',code[p]])
+            p+=1
         return tokes
     def run(self,tokes:list):
-        pointer=0
-        while pointer!=len(tokes):
-            if tokes[pointer]=="print":
-                if tokes[pointer+1]!="bracket":
+        p=0
+        while p!=len(tokes):
+            if tokes[p]=="print":
+                if tokes[p+1]!="bracket":
                     print("Incorrect Syntax!");return 1
-                pointer+=2
-                while tokes[pointer]!="bracket":
-                    print(eval(tokes[pointer][1]),end=" ")
-                    pointer+=1
-            pointer+=1
-def unbounded_insert(list:list,index:int,object:typing.Any)->None:
-  try:
-    int(index)
-    list+=["0"]*(int(index)-len(list))
-    list[int(index)-1]=" ".join(object)
-    return list
-  except(ValueError,TypeError):
-    raise TypeError(
-      "Index must be an int, str was given instead"
-    )
-while 1:
-  i=input("f:")
+                p+=2
+                while tokes[p]!="bracket":
+                    print(eval(tokes[p][1]),end=" ")
+                    p+=1
+            p+=1
+while(i:=input("f:"))!="exit":
   if i=="run":
     if lines:
       AmungBASIC(lines)
       print()
     else:
-       print("No lines to run!")
+      print("No lines to run!")
   elif i=="wipe": lines.clear()
+  elif i=="list": 
+     for i in lines:
+        print(lines.index(i)+1,i)if lines and i!="0"else...
   else:
-    unbounded_insert(lines,i.split()[0],i.split()[1:])
+    try:
+      int(i.split()[0])
+      lines+=["0"]*(int(i.split()[0])-len(lines))
+      lines[int(i.split()[0])-1]=" ".join(i.split()[1:])
+    except(ValueError,TypeError):
+      raise TypeError(
+        "Index must be an int, str was given instead"
+      )
