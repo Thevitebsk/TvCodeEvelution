@@ -22,8 +22,7 @@ class AmungBASIC(object):
     def tokenize(self,code):
         tokes=[]
         p=0
-        for _ in ["=","[","]","!"]:
-            code=code.replace(_,f' {_} ')
+        for _ in ["=","[","]","!"]: code=code.replace(_,f' {_} ')
         code=code.split()
         while p!=len(code):
             if code[p]in["print","`"]:
