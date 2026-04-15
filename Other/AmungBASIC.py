@@ -22,14 +22,16 @@ class AmungBASIC(object):
     def tokenize(self,code):
         tokes=[]
         p=0
-        for _ in ["=","[","]"]:
+        for _ in ["=","[","]","!"]:
             code=code.replace(_,f' {_} ')
         code=code.split()
         while p!=len(code):
-            if code[p]=="print":
+            if code[p]in["print","`"]:
                 tokes.append("print")
             elif code[p]in"[]":
                 tokes.append("bracket")
+            elif code[p]in["!","remind"]:
+                tokes.append("remind")
             else:
                 tokes.append(['id',code[p]])
             p+=1
@@ -44,7 +46,21 @@ class AmungBASIC(object):
                 while tokes[p]!="bracket":
                     print(eval(tokes[p][1]),end=" ")
                     p+=1
+            if tokes[p]=="remind": break
             p+=1
+def to_line(x):
+    global lines
+    try:
+      a=int(x.split()[0])
+      if a>0:
+        if a-len(lines)>0:lines+=["0"]*(a-len(lines))
+        lines[a-1]=" ".join(x.split()[1:])
+      else:raise TypeError(
+        "Error parsing the line,\n"
+        "Line numbers must be a positive natural number!"
+       )
+    except(ValueError,TypeError):
+      raise TypeError("Error parsing the line")
 while(i:=input("f:"))!="exit":
   if i=="run":
     if lines:
@@ -53,15 +69,14 @@ while(i:=input("f:"))!="exit":
     else:
       print("No lines to run!")
   elif i=="wipe": lines.clear()
-  elif i=="list": 
-     for i in lines:
-        print(lines.index(i)+1,i)if lines and i!="0"else...
-  else:
-    try:
-      int(i.split()[0])
-      lines+=["0"]*(int(i.split()[0])-len(lines))
-      lines[int(i.split()[0])-1]=" ".join(i.split()[1:])
-    except(ValueError,TypeError):
-      raise TypeError(
-        "Index must be an int, str was given instead"
-      )
+  elif i=="list":
+    t=0
+    for i in lines:
+      t+=1
+      print(t,i)if lines and i!="0"else...
+  elif i=="open":
+    while not lines and(i:=input("o:"))!="":
+      lines=[]
+      for i in open(f"{i}").readlines():
+        to_line(i)
+  else: to_line(i)
