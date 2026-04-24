@@ -20,7 +20,7 @@ class Painfull:
         print(x)
         while p!=len(x):
             print(x[p],v,w,output)
-            if x[p]==0: break #HALT
+            if x[p]==15: break #HALTi
             elif x[p]==1: #ADD
                 try:w[x[p+2]]=x[p+1]+w[x[p+2]]; p+=2
                 except IndexError:print(f"pos: {p} -> {x[p]}\nnot enough arguments were given");exit()

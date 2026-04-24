@@ -7,7 +7,7 @@ try:FILE=open(sys.argv[1]).read()
 except:FILE=""
 
 while point!=len(keywords)-1:
-    # Removes every instance of a newline in the keywords.txt file
+    # Removes every instance of a newline in the keywords vaiable
     keywords[point]=keywords[point].replace("\n","")
     point+=1
 

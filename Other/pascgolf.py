@@ -9,12 +9,11 @@ def evalpascgolf(x):
       p+=1; return str(res)
    elif x[0]=="v":
       try:p+=3; return str(v[x[1]])
-      except KeyError: print(f"No varible named \"{i[p+2]}\" exists")
-   else: print("This type doesn't exist");return False
+      except KeyError: print(f"No varible named \"{i[p+2]}\" exists");exit()
+   else: print(f"The type \"{x[0]}\" does not exist");exit()
 try:
-   while 1:
+   while i[p]!=";"and p!=len(i)-1:
       if i[p]=="v": v[i[p+1]]=i[p+2:i.index(";",p)]; p=i.index(";",p)+1; BACK=True
-      elif i[p]==";"and p==len(i)-1: break
       elif i[p]==".": out+=evalpascgolf(i[p+1:p+3])
       else: print(f"not a valid pascgolf command \"{i[p]}\" -> pos: {p+1}");exit()
       if not BACK:p+=1

@@ -1,4 +1,5 @@
-#this version of gammascript is really incomplete and will probably never will be complete
+#this version of gammascript is really incomplete and will never will be complete (because tfw whould i do that)
+
 class gs(object):
     def __init__(self,code):
         try:int(self.run(self.tokenize(code)));print(
@@ -13,7 +14,7 @@ class gs(object):
             if code[pointer]=="write":
                 tokes.append("print")
             elif code[pointer]in"{}":
-                tokes.append("bracket")
+                tokes.append(["bracket",code[pointer]])
             else:
                 tokes.append(['id',code[pointer]])
             pointer+=1
@@ -22,11 +23,11 @@ class gs(object):
         pointer=0
         while pointer!=len(tokes):
             if tokes[pointer]=="print":
-                if tokes[pointer+1]!="bracket":
+                if tokes[pointer+1][1]!="{":
                     print("Incorrect Syntax!");return 1
                 pointer+=2
-                while tokes[pointer]!="bracket":
+                while tokes[pointer][1]!="}":
                     print(tokes[pointer][1],end=" ")
                     pointer+=1
             pointer+=1
-gs("write{smth}")
+gs("write{smth ig}")
