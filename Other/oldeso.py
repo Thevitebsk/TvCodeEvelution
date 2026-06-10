@@ -1,7 +1,6 @@
 #QBiA.py
 
-print("@@@ @@@ @@@\n@   @   @ @\n@@@ @@@ @ @\n@     @ @ @\n@@@ @@@ @@@")
-print("\nA collection of implementations of esolangs made by Gaham\n")
+print("\nESO\nA collection of implementations of esolangs made by Gaham\n")
 while True:
     i=input("input an esolangs name:").lower()
     if i=="brainfuck":
@@ -18,9 +17,7 @@ while True:
                 elif j==",":c[p]=int(input())
             if j=="E":break
     elif i=="eson":
-        print("\n"*50)
-        print("@@@@ @@@@      @  @\n@    @         @@ @\n@@@@ @@@@ @@@@ @ @@\n@       @ @  @ @  @\n@@@@ @@@@ @@@@ @  @")
-        print("Esoteric Sequence of Numbers. An original esolang by Ractangle")
+        print("\n"*50+"Esoteric Sequence of Numbers. An original esolang by Ractangle")
         while True:
             s=[]
             a=b=0

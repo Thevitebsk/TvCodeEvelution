@@ -1,6 +1,6 @@
 import sys;regs={};ops=[];p=ne=d=0
 for _ in range(0,16):regs[_]=0
-try:f=open(sys.argv[1]).readlines()
+try:f=open(sys[1]).readlines()
 except(FileNotFoundError,IndexError):
     print("no file is used or it doesn't exist")
     exit()
@@ -40,4 +40,4 @@ while ops[p]!="END"and d<4096:
     elif ops[p][0]in[";","$"]: ...
     else: print(f"undefined instruction \"{ops[p]}\"",p);break
     p+=1;d+=1
-print(f"\nOP:{len(ops):>18}\nACTUAL BYTESIZE:   {len(open(sys.argv[1]).read())}")
+print(f"\nOPERATORS:{len(ops):>10}\nACTUAL BYTESIZE:   {len(open(sys[1]).read())}")
