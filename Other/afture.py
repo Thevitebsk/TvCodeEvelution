@@ -1,18 +1,15 @@
-#wKJr.py
-#brother to the branjunk language
+# Afftur
+# brother to the branjunk language
 
-#examples
-#+++++++*---*+++++++**+++*++++++++*--------*+++*------*%+++*/ - hello world
 print("afftur\na brother to branjunk")
-ac=mem=0
 while 1:
-    ac=0
-    while 1:
-        for c in input("\n>> "):
-            if c == "+":   ac += 1
-            elif c == "-": ac -= 1
-            elif c == "*": print(ac)
-            elif c == "/": break
-            elif c == "%": mem=ac; ac=0
-            elif c == "?": mem=int(input())
-            elif c == "`": print(mem,end=" ")
+    ac=mem=p=0
+    i=input("\n>>")
+    while p<len(i)and i[p]!="/":
+        if i[p]=="+":   ac += 1
+        elif i[p]=="-": ac -= 1
+        elif i[p]=="*": print(ac)
+        elif i[p]=="?": mem=int(input())
+        elif i[p]=="%": mem,ac=ac,mem
+        elif i[p]=="`": print(mem,end=" ")
+        p+=1

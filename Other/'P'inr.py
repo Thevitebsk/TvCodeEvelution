@@ -13,7 +13,6 @@ while p!=len(c):
  p+=1
 p=0
 while len(c)>p and c[p]!=";":
- #print(c[p:],l)
  if c[p]==":":s.append(s[-1])
  elif c[p]=="?":
   if str(s.pop())!=str(s.pop()):
