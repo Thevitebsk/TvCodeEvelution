@@ -1,17 +1,41 @@
-<head>
-<meta charset="utf-8">
 <title>About "Try it!"</title>
 <style>
-#h  { font-size:15px }
-#rh { font-size:35px }
-*   { color:#FFFFFF ; background-color:#000000  }
+h1 {margin: 0;}
+th {
+    border: 2px solid black;
+    text-align: start;
+}
 </style>
-</head>
-<body>
-<a href=".html"><img src="logo.png" alt="TI!" width="90"></a><br>
-<tt id="rh">About "Try It!":</tt><hr>
-<tt>"Try It!" is a TIO-like website created by <a href="https://github.com/Thevitebsk">Gaham (or Thevitebsk)</a><br>The name came from the <a href="https://esolangs.org/w/index.php?title=AmBored&oldid=135981#Interpriter">esolangs.org page "AmBored" in the interpriter section</a></tt>
-<tt id="rh">Currently implemented languages:</tt><hr><tt>[<a href="https://esolangs.org/wiki/%2B*-">+*-</a> (with 2 debug commands), <a href="https://esolangs.org/wiki/6">6</a>]</tt><hr>
+<a href="./index.html">back home!</a><br>
+<h1>About "Try It!":</h1><hr>
+<p>"Try It!" is a TIO-based website created by <a href="https://www.youtube.com/@gamma123-xyz">Gaham</a><br>
+The name came from the <a href="https://esolangs.org/w/index.php?title=AmBored&oldid=135981#Interpriter">the interpriter section in the esolangs.org page "AmBored"</a></p><hr>
+<tt id="rh">Currently implemented languages:</tt>
+<table>
+    <tr>
+        <th>Language</th>
+        <th>Creator</th>
+        <th>Link to documentation</th>
+    </tr>
+<script>
+    langs=[
+    ["+*-","esolangs.org/wiki/User:None1","%2B*-"],["SOD-sm","esolangs.org/wiki/User:None1","%2B*-"],
+    ]
+    for (i in langs){
+        document.write(
+        `<tr>
+            <th>${langs[i][0]}</th>
+            <th>
+                <a href="https://${langs[i][1]}">${langs[i][1].split("/").slice(-1)}</a>
+            </th>
+            <th>
+                <a href="https://esolangs.org/wiki/${langs[i][2]}">https://esolangs.org/wiki/${langs[i][2]}</a>
+            </th>
+        </tr>`
+        )
+    }
+</script>
+</table><hr>
 <tt id="rh">Want your own language to be added to "Try it"?</tt><br>
-<tt id="h">as of August 30th, "Try it" now allows language requests, suggest them <a href="https://github.com/Thevitebsk/TvCodeEvelution/issues/1">here</a>!</tt>
-</body>
+<tt id="h">as of August 30th, "Try it" now allows language requests, suggest them <a href="https://github.com/Thevitebsk/TvCodeEvelution/discussions/2">here</a>
+or <a href="https://esolangs.org/wiki/Talk:Tryit.org">here</a></tt>

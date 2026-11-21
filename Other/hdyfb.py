@@ -1,6 +1,8 @@
+#based on the implementation by User:Xyzzy (https://esolangs.org/wiki/User:Xyzzy)
+# dunno if i should keep this credit
 debug=0
 claw=cp=dp=0;tape=[0]*8
-code="""II=+=+=+=+=^↑v=+^II=+=+v+P=^^↓v+DDDP^I=+=+=+Dv+PPIIIP^II=+=+=+=+PvvIIIIIIIIIIIIIIIP^PIIIPDDDDDDP^^DD+=+=+vv↑^^^↓v+PvIPH""".strip()
+code="""""".strip()
 while cp!=len(code):
   if code[cp]=="I":tape[dp]+=1
   elif code[cp]=="D":tape[dp]-=1
